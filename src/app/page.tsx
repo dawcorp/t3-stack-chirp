@@ -1,7 +1,16 @@
 import Link from "next/link";
 
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 import { LatestPost } from "@/app/_components/post";
 import { api, HydrateClient } from "@/trpc/server";
+import { SignIn } from "@clerk/nextjs";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -47,6 +56,13 @@ export default async function Home() {
 
           <LatestPost />
         </div>
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </main>
     </HydrateClient>
   );
